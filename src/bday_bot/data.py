@@ -61,11 +61,11 @@ KIND_SHELBY_REPLY = [
 ]
 
 PATRONIZING_RESPONSE = [
-    "Shelby, it's nice that you reacted, but this poll isn't about what you think. It's about what everyone else thinks."
-    "Shelby, I know you're excited, but now is not the time to share your opinion."
-    "Shelby, I appreciate your enthusiasm, but let's let others have a chance to share their thoughts."
-    "Shelby, I'm glad you're participating, but let's give others a chance to react too."
-    "Shelby, I know you're eager to share your thoughts, but let's give others a chance to react first."
+    "Shelby, it's nice that you reacted, but this poll isn't about what you think. It's about what everyone else thinks.",
+    "Shelby, I know you're excited, but now is not the time to share your opinion.",
+    "Shelby, I appreciate your enthusiasm, but let's let others have a chance to share their thoughts.",
+    "Shelby, I'm glad you're participating, but let's give others a chance to react too.",
+    "Shelby, I know you're eager to share your thoughts, but let's give others a chance to react first.",
 ]
 
 REPLY_TO_POSITIVE_RESPONSE = [

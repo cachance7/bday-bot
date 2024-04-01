@@ -119,17 +119,17 @@ async def on_message(message: discord.Message):
 async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
     print(f"{user} reacted with {reaction} to message {reaction.message}")
 
+    item = item_lookup.get(reaction.message.id)
+    if not item:
+        print(f"Could not find item for message {reaction.message.id}")
+        print(item_lookup)
+        return
+
     if "shelby" == user.display_name or "btier" == user.display_name:
         await reaction.message.reply(random.choice(PATRONIZING_RESPONSE))
         return
 
     if user == client.user:
-        return
-
-    item = item_lookup.get(reaction.message.id)
-    if not item:
-        print(f"Could not find item for message {reaction.message.id}")
-        print(item_lookup)
         return
 
     if item and reaction.emoji not in item["reactions"]:
