@@ -57,7 +57,7 @@ async def post_fun_fact_or_poll():
     )
     if not channel:
         channel = await guild.create_text_channel(
-            BOT_CHANNEL, topic="Shelby is 30 today. Let's celebrate! 🎉"
+            BOT_CHANNEL, topic="Shelby is 30 today. Let's celebrate them! 🎉"
         )
 
     await channel.send(
@@ -80,7 +80,7 @@ async def post_fun_fact_or_poll():
                 await message.add_reaction(reaction)
 
         # Wait for 1.25 hours before posting again
-        await asyncio.sleep(75 * 60)
+        await asyncio.sleep(random.randint(70, 90))
 
     await channel.send(
         "That's all for now. Thanks for participating! Hope you had a happy birthday Shelby! 🎉🎉🎉"
