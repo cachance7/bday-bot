@@ -71,9 +71,6 @@ async def post_fun_fact_or_poll():
     # )
 
     for item in FACTS_AND_POLLS:
-        # Wait about an hour before posting again
-        await asyncio.sleep(random.randint(70, 90) * 60)
-
         if item["type"] == "fact":
             message = await channel.send(f"FACT: {item['text']}")
             item_lookup[message.id] = item
@@ -82,6 +79,9 @@ async def post_fun_fact_or_poll():
             item_lookup[message.id] = item
             for reaction in item["reactions"]:
                 await message.add_reaction(reaction)
+
+        # Wait about an hour before posting again
+        await asyncio.sleep(random.randint(70, 90) * 60)
 
     await channel.send(
         "That's all for now. Thanks for participating! Hope you had a happy birthday Shelby! 🎉🎉🎉"

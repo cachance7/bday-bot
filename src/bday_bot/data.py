@@ -50,7 +50,7 @@ FUN_FACT_ITEMS = [
     for fact in FUN_FACTS
 ]
 
-FACTS_AND_POLLS = [*sum(zip(POLLS, FUN_FACT_ITEMS), ())]
+FACTS_AND_POLLS = [*sum(zip(FUN_FACT_ITEMS, POLLS), ())]
 
 KIND_SHELBY_REPLY = [
     "Happy birthday Shelby!",
