@@ -55,20 +55,24 @@ async def post_fun_fact_or_poll():
         ),
         None,
     )
+
     if not channel:
         channel = await guild.create_text_channel(
             BOT_CHANNEL, topic="Shelby is 30 today. Let's celebrate them! 🎉"
         )
 
-    await channel.send(
-        "Hello - I am here to celebrate Shelby's birthday. Participation is mandatory. @everyone"
-    )
-    await asyncio.sleep(2)
-    await channel.send(
-        "Let's all take a moment to appreciate Shelby by sharing how we feel about him through emoji."
-    )
+    #
+    # await channel.send(
+    #     "Hello - I am here to celebrate Shelby's birthday. Participation is mandatory. @everyone"
+    # )
+    # await asyncio.sleep(2)
+    # await channel.send(
+    #     "Let's all take a moment to appreciate Shelby by sharing how we feel about him through emoji."
+    # )
 
     for item in FACTS_AND_POLLS:
+        # Wait about an hour before posting again
+        await asyncio.sleep(random.randint(70, 90) * 60)
 
         if item["type"] == "fact":
             message = await channel.send(f"FACT: {item['text']}")
@@ -78,9 +82,6 @@ async def post_fun_fact_or_poll():
             item_lookup[message.id] = item
             for reaction in item["reactions"]:
                 await message.add_reaction(reaction)
-
-        # Wait about an hour before posting again
-        await asyncio.sleep(random.randint(70, 90) * 60)
 
     await channel.send(
         "That's all for now. Thanks for participating! Hope you had a happy birthday Shelby! 🎉🎉🎉"
@@ -92,9 +93,18 @@ async def on_message(message: discord.Message):
     assert client.user
 
     if client.user.mentioned_in(message):
-        if "shelby" in message.author.name or "btier" in message.author.name:
+        if (
+            "shelby" == message.author.display_name
+            or "btier" == message.author.display_name
+        ):
             await message.reply(random.choice(KIND_SHELBY_REPLY))
         elif message.author != client.user:
+            if "sing" in message.content:
+                await message.reply(
+                    "🎶 Happy birthday to you! 🎶 Happy birthday to you! 🎶 Happy birthday dear Shelby! 🎶 Happy birthday to you! 🎶"
+                )
+                return
+
             sentiment = analyze_sentiment(message.content)
             if sentiment == "Positive":
                 await message.reply(random.choice(REPLY_TO_POSITIVE_RESPONSE))
@@ -108,14 +118,20 @@ async def on_message(message: discord.Message):
 async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
     print(f"{user} reacted with {reaction} to message {reaction.message}")
 
-    if "shelby" in user.name or "btier" in user.name:
+    if "shelby" == user.display_name or "btier" == user.display_name:
         await reaction.message.reply(random.choice(PATRONIZING_RESPONSE))
         return
 
     if user == client.user:
         return
 
-    if reaction.emoji not in item_lookup[reaction.message.id]["reactions"]:
+    item = item_lookup.get(reaction.message.id)
+    if not item:
+        print(f"Could not find item for message {reaction.message.id}")
+        print(item_lookup)
+        return
+
+    if item and reaction.emoji not in item["reactions"]:
         await reaction.message.reply(
             f"Really {user.mention}? {reaction.emoji}?"
             + " "

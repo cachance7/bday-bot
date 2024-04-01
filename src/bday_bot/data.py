@@ -1,10 +1,10 @@
 POLLS = [
-    {
-        "id": "pizza-poll",
-        "type": "poll",
-        "question": "What is Shelby's favorite pizza topping?",
-        "reactions": ["🍕", "🍍", "🍖", "🍅", "🍆"],
-    },
+    # {
+    #     "id": "pizza-poll",
+    #     "type": "poll",
+    #     "question": "What is Shelby's favorite pizza topping?",
+    #     "reactions": ["🍕", "🍍", "🍖", "🍅", "🍆"],
+    # },
     {
         "id": "animal-poll",
         "type": "poll",
