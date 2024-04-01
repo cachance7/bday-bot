@@ -99,6 +99,7 @@ async def on_message(message: discord.Message):
         ):
             await message.reply(random.choice(KIND_SHELBY_REPLY))
         elif message.author != client.user:
+            print(f"Received message: {message.content}")
             if "sing" in message.content:
                 await message.reply(
                     "🎶 Happy birthday to you! 🎶 Happy birthday to you! 🎶 Happy birthday dear Shelby! 🎶 Happy birthday to you! 🎶"
