@@ -125,6 +125,9 @@ async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
         print(item_lookup)
         return
 
+    if item["type"] != "poll":
+        return
+
     if "shelby" == user.display_name or "btier" == user.display_name:
         await reaction.message.reply(random.choice(PATRONIZING_RESPONSE))
         return
