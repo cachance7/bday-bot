@@ -1,25 +1,30 @@
 POLLS = [
     {
+        "id": "pizza-poll",
         "type": "poll",
         "question": "What is Shelby's favorite pizza topping?",
         "reactions": ["🍕", "🍍", "🍖", "🍄", "🍅"],
     },
     {
+        "id": "animal-poll",
         "type": "poll",
         "question": "Which zoo animal is Shelby's least favorite?",
         "reactions": ["🦁", "🐘", "🐶", "🐧", "👶"],
     },
     {
+        "id": "ice-cream-poll",
         "type": "poll",
         "question": "If Shelby could eat ice cream, what flavor would they choose?",
         "reactions": ["🍦", "🍨", "🍧", "🍭"],
     },
     {
+        "id": "fmk-poll",
         "type": "poll",
         "question": "FMK: Shelby, Shelbs, Dr. S",
         "reactions": ["🔥", "💔", "👻"],
     },
     {
+        "id": "literally-poll",
         "type": "poll",
         "question": "Can Shelby literally not even?",
         "reactions": ["🙅", "🌕", "🙇", "🙈", "👽"],
@@ -38,6 +43,7 @@ FUN_FACTS = [
 
 FUN_FACT_ITEMS = [
     {
+        "id": f"fun-fact-{hash(fact)}",
         "type": "fact",
         "text": fact,
     }
@@ -89,4 +95,10 @@ REACTION_RESPONSES = [
     "I can't believe you would say that",
     "Shelby is going to be so mad at you",
     "I'm sure Shelby would disagree with you",
+]
+
+NON_EXISTING_REACTION_RESPONSES = [
+    "The options I gave you weren't good enough?",
+    "You just had to pick something else, didn't you?",
+    "Look at the beautiful options I gave you, and you chose something else",
 ]
