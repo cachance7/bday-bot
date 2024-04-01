@@ -73,6 +73,7 @@ REPLY_TO_POSITIVE_RESPONSE = [
     "I'm so happy for you!",
     "I'm glad you're having a good day!",
     "That's awesome!",
+    "That is so interesting",
 ]
 
 REPLY_TO_NEGATIVE_RESPONSE = [

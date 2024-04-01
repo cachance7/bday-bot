@@ -29,8 +29,8 @@ intents.reactions = True
 
 client = discord.Client(intents=intents)
 
-# TARGET_SERVER = ("Queers for Fears", 1216970775052025876)
-TARGET_SERVER = ("casey's server", 704379622627999744)
+TARGET_SERVER = ("Queers for Fears", 1216970775052025876)
+# TARGET_SERVER = ("casey's server", 704379622627999744)
 
 item_lookup = {}
 
@@ -79,8 +79,8 @@ async def post_fun_fact_or_poll():
             for reaction in item["reactions"]:
                 await message.add_reaction(reaction)
 
-        # Wait for 1.25 hours before posting again
-        await asyncio.sleep(random.randint(70, 90))
+        # Wait about an hour before posting again
+        await asyncio.sleep(random.randint(70, 90) * 60)
 
     await channel.send(
         "That's all for now. Thanks for participating! Hope you had a happy birthday Shelby! 🎉🎉🎉"
@@ -92,7 +92,7 @@ async def on_message(message: discord.Message):
     assert client.user
 
     if client.user.mentioned_in(message):
-        if "shelby" in message.author.name:
+        if "shelby" in message.author.name or "btier" in message.author.name:
             await message.reply(random.choice(KIND_SHELBY_REPLY))
         elif message.author != client.user:
             sentiment = analyze_sentiment(message.content)
@@ -108,7 +108,7 @@ async def on_message(message: discord.Message):
 async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
     print(f"{user} reacted with {reaction} to message {reaction.message}")
 
-    if "shelby" in user.name:
+    if "shelby" in user.name or "btier" in user.name:
         await reaction.message.reply(random.choice(PATRONIZING_RESPONSE))
         return
 
