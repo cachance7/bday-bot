@@ -26,7 +26,6 @@ BOT_CHANNEL = "shelby-bday-react-zone"
 intents = discord.Intents.none()
 intents.messages = True
 intents.reactions = True
-intents.members = True
 
 
 client = discord.Client(intents=intents)
@@ -94,45 +93,54 @@ async def post_fun_fact_or_poll():
     # await asyncio.sleep(10 * 60)
 
     try:
+        members = []
+        async for member in guild.fetch_members(limit=None):
+            members.append(member)
+
         # find lauren in the guild
-        print("Finding lauren")
-        lauren = guild.get_member_named("lauren")
+        lauren = next(
+            (member for member in members if member.display_name.lower() == "lauren"),
+            None,
+        )
 
         if lauren:
-            print("Sending message to lauren")
-            await channel.send(f"Hey {lauren.mention}, thanks for your help. Nice answers! 🌟")
+            await channel.send(f"Hey {lauren.mention}, nice answers! 🌟")
             await asyncio.sleep(2)
-            print("Sent message to lauren")
 
         # find al in the guild
-        print("Finding al")
-        al = guild.get_member_named("al")
+        al = next((member for member in members if member.display_name == "al"), None)
 
         if al:
             await channel.send(f"Hey {al.mention}, fight me! 🤺")
             await asyncio.sleep(2)
 
         # find fisaurus
-        fisaurus = guild.get_member_named("fisaurus")
+        fisaurus = next(
+            (member for member in members if member.display_name == "fisaurus"),
+            None,
+        )
 
         if fisaurus:
             await channel.send(f"Hey {fisaurus.mention}, I won our debate. 🏆")
             await asyncio.sleep(2)
 
         # find thurgen
-        thurgen = guild.get_member_named("thurgen")
+        thurgen = next(
+            (member for member in members if member.display_name == "thurgen"),
+            None,
+        )
 
         if thurgen:
             await channel.send(f"Hey {thurgen.mention}, I saw you! 👀")
             await asyncio.sleep(2)
 
         # find shelby
-        print("Finding shelby")
-        shelby = guild.get_member_named("shelby")
+        shelby = next(
+            (member for member in members if member.display_name == "shelby"),
+            None,
+        )
 
-        print(f"Found shelby: {shelby}")
         if shelby:
-            print("Sending message to shelby")
             await channel.send(
                 f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, {shelby.mention}! 🎉🎉🎉"
             )
@@ -141,7 +149,6 @@ async def post_fun_fact_or_poll():
                 "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
             )
     except Exception as e:
-        print(f"Error closing channel: {e}")
         await channel.send(
             f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, Shelby! 🎉🎉🎉"
         )
@@ -149,7 +156,6 @@ async def post_fun_fact_or_poll():
         await channel.send(
             "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
         )
-        print("Sent closing message")
 
 
 @client.event
