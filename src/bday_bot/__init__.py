@@ -71,6 +71,9 @@ async def post_fun_fact_or_poll():
     # )
 
     for item in FACTS_AND_POLLS:
+        # Wait about an hour before posting again
+        await asyncio.sleep(10 * 60)
+
         if item["type"] == "fact":
             message = await channel.send(f"FACT: {item['text']}")
             item_lookup[message.id] = item
@@ -80,39 +83,109 @@ async def post_fun_fact_or_poll():
             for reaction in item["reactions"]:
                 await message.add_reaction(reaction)
 
-        # Wait about an hour before posting again
-        await asyncio.sleep(random.randint(70, 90) * 60)
+    await asyncio.sleep(10 * 60)
 
-    await channel.send(
-        "That's all for now. Thanks for participating! Hope you had a happy birthday Shelby! 🎉🎉🎉"
-    )
+    try:
+        # find lauren in the guild
+        lauren = next(
+            (
+                member
+                for member in guild.members
+                if member.display_name.lower() == "lauren"
+            ),
+            None,
+        )
+
+        if lauren:
+            await channel.send(f"Hey {lauren.mention}, you nice answers! 🌟")
+
+        # find al in the guild
+        al = next(
+            (member for member in guild.members if member.display_name == "al"), None
+        )
+
+        if al:
+            await channel.send(f"Hey {al.mention}, fight me! 🤺")
+
+        # find fisaurus
+        fisaurus = next(
+            (member for member in guild.members if member.display_name == "fisaurus"),
+            None,
+        )
+
+        if fisaurus:
+            await channel.send(f"Hey {fisaurus.mention}, I won our debate. 🏆")
+
+        # find thurgen
+        thurgen = next(
+            (member for member in guild.members if member.display_name == "thurgen"),
+            None,
+        )
+
+        if thurgen:
+            await channel.send(f"Hey {thurgen.mention}, I saw you! 👀")
+
+        # find shelby
+        shelby = next(
+            (member for member in guild.members if member.display_name == "shelby"),
+            None,
+        )
+
+        if shelby:
+            await channel.send(
+                f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, {shelby.mention}! 🎉🎉🎉"
+            )
+    except Exception as e:
+        await channel.send(
+            f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, Shelby! 🎉🎉🎉"
+        )
 
 
 @client.event
 async def on_message(message: discord.Message):
     assert client.user
 
-    if client.user.mentioned_in(message):
-        if (
-            "shelby" == message.author.display_name
-            or "btier" == message.author.display_name
-        ):
-            await message.reply(random.choice(KIND_SHELBY_REPLY))
-        elif message.author != client.user:
-            print(f"Received message: {message.content}")
-            if "sing" in message.content:
-                await message.reply(
-                    "🎶 Happy birthday to you! 🎶 Happy birthday to you! 🎶 Happy birthday dear Shelby! 🎶 Happy birthday to you! 🎶"
-                )
-                return
+    if not client.user.mentioned_in(message):
+        return
 
-            sentiment = analyze_sentiment(message.content)
-            if sentiment == "Positive":
-                await message.reply(random.choice(REPLY_TO_POSITIVE_RESPONSE))
-            elif sentiment == "Negative":
-                await message.reply(random.choice(REPLY_TO_NEGATIVE_RESPONSE))
-            else:
-                await message.reply(random.choice(REPLY_TO_NEUTRAL_RESPONSE))
+    if (
+        "shelby" == message.author.display_name
+        or "btier" == message.author.display_name
+    ):
+        await message.reply(random.choice(KIND_SHELBY_REPLY))
+        return
+
+    if "al" == message.author.display_name:
+        await message.reply(
+            random.choice(["What were you told about antagonizing me?", "Fight me!"])
+        )
+        return
+
+    if "fisaurus" == message.author.display_name:
+        await message.reply(
+            "I'm sorry, I can't hear you over the sound of how right I am.",
+        )
+        return
+
+    if "thanks" in message.content.lower() or "thank you" in message.content.lower():
+        await message.reply("No, thank YOU!")
+        return
+
+    if message.author != client.user:
+        print(f"Received message: {message.content}")
+        if "sing" in message.content:
+            await message.reply(
+                "🎶 Happy birthday to you! 🎶 Happy birthday to you! 🎶 Happy birthday dear Shelby! 🎶 Happy birthday to you! 🎶"
+            )
+            return
+
+        sentiment = analyze_sentiment(message.content)
+        if sentiment == "Positive":
+            await message.reply(random.choice(REPLY_TO_POSITIVE_RESPONSE))
+        elif sentiment == "Negative":
+            await message.reply(random.choice(REPLY_TO_NEGATIVE_RESPONSE))
+        else:
+            await message.reply(random.choice(REPLY_TO_NEUTRAL_RESPONSE))
 
 
 @client.event

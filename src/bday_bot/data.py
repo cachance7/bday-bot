@@ -5,40 +5,40 @@ POLLS = [
     #     "question": "What is Shelby's favorite pizza topping?",
     #     "reactions": ["🍕", "🍍", "🍖", "🍅", "🍆"],
     # },
-    {
-        "id": "animal-poll",
-        "type": "poll",
-        "question": "Which zoo animal is Shelby's favorite?",
-        "reactions": ["🐘", "🐶", "🐧", "👶"],
-    },
-    {
-        "id": "ice-cream-poll",
-        "type": "poll",
-        "question": "If Shelby could eat ice cream, what flavor would they choose?",
-        "reactions": ["🍦", "🍨", "🦁"],
-    },
-    {
-        "id": "fmk-poll",
-        "type": "poll",
-        "question": "FMK: Shelby, Shelbs, Dr. S",
-        "reactions": ["🔥", "💔", "👻"],
-    },
-    {
-        "id": "literally-poll",
-        "type": "poll",
-        "question": "If Shelby won the lottery, what would he buy first?",
-        "reactions": ["🌕", "🐒", "🏝️", "🍣"],
-    },
+    # {
+    #     "id": "animal-poll",
+    #     "type": "poll",
+    #     "question": "Which zoo animal is Shelby's favorite?",
+    #     "reactions": ["🐘", "🐶", "🐧", "👶"],
+    # },
+    # {
+    #     "id": "ice-cream-poll",
+    #     "type": "poll",
+    #     "question": "If Shelby could eat ice cream, what flavor would they choose?",
+    #     "reactions": ["🍦", "🍨", "🦁"],
+    # },
+    # {
+    #     "id": "fmk-poll",
+    #     "type": "poll",
+    #     "question": "FMK: Shelby, Shelbs, Dr. S",
+    #     "reactions": ["🔥", "💔", "👻"],
+    # },
+    # {
+    #     "id": "literally-poll",
+    #     "type": "poll",
+    #     "question": "If Shelby won the lottery, what would he buy first?",
+    #     "reactions": ["🌕", "🐒", "🏝️", "🍣"],
+    # },
 ]
 
 
 # Each fact ends with an ironic emoji
 FUN_FACTS = [
-    "Shelby was born with a full set of teeth! 😬",
-    "Shelby has killed and can't wait to kill again 😈",
-    "Shelby once got runner up in a hotdog eating quiz! 🌭",
-    "Shelby has a pet rock named Rocky, a pet stick named Sticky, and tupperware of unknown slime named Scooby Goo! 🐶",
-    "Shelby has a secret talent for juggling the stresses of daily life! 🤹",
+    # "Shelby was born with a full set of teeth! 😬",
+    # "Shelby has killed and can't wait to kill again 😈",
+    # "Shelby once got runner up in a hotdog eating quiz! 🌭",
+    # "Shelby has a pet rock named Rocky, a pet stick named Sticky, and tupperware of unknown slime named Scooby Goo! 🐶",
+    "Shelby has a secret for juggling the stresses of daily life. You won't believe what it is! 🤫",
 ]
 
 FUN_FACT_ITEMS = [
