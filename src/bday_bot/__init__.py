@@ -71,26 +71,26 @@ async def post_fun_fact_or_poll():
     #     "Let's all take a moment to appreciate Shelby by sharing how we feel about him through emoji."
     # )
 
-    for item in FUN_FACT_ITEMS:
-        try:
-            print(f"Posting item {item}")
-            # await asyncio.sleep(5 * 60)
-
-            if item["type"] == "fact":
-                print(f"Posting fact {item['text']}")
-                message = await channel.send(f"FACT: {item['text']}")
-                item_lookup[message.id] = item
-            else:
-                print(f"Posting poll {item['question']}")
-                message = await channel.send(f"POLL: {item['question']}")
-                item_lookup[message.id] = item
-                for reaction in item["reactions"]:
-                    await message.add_reaction(reaction)
-        except Exception as e:
-            print(f"Error posting item {item}: {e}")
-
-    print("All items posted. Waiting for 10 minutes before closing the channel.")
-    await asyncio.sleep(10 * 60)
+    # for item in FUN_FACT_ITEMS:
+    #     try:
+    #         print(f"Posting item {item}")
+    #         # await asyncio.sleep(5 * 60)
+    #
+    #         if item["type"] == "fact":
+    #             print(f"Posting fact {item['text']}")
+    #             message = await channel.send(f"FACT: {item['text']}")
+    #             item_lookup[message.id] = item
+    #         else:
+    #             print(f"Posting poll {item['question']}")
+    #             message = await channel.send(f"POLL: {item['question']}")
+    #             item_lookup[message.id] = item
+    #             for reaction in item["reactions"]:
+    #                 await message.add_reaction(reaction)
+    #     except Exception as e:
+    #         print(f"Error posting item {item}: {e}")
+    #
+    # print("All items posted. Waiting for 10 minutes before closing the channel.")
+    # await asyncio.sleep(10 * 60)
 
     try:
         # find lauren in the guild
@@ -105,6 +105,7 @@ async def post_fun_fact_or_poll():
 
         if lauren:
             await channel.send(f"Hey {lauren.mention}, nice answers! 🌟")
+            await asyncio.sleep(2)
 
         # find al in the guild
         al = next(
@@ -113,6 +114,7 @@ async def post_fun_fact_or_poll():
 
         if al:
             await channel.send(f"Hey {al.mention}, fight me! 🤺")
+            await asyncio.sleep(2)
 
         # find fisaurus
         fisaurus = next(
@@ -122,6 +124,7 @@ async def post_fun_fact_or_poll():
 
         if fisaurus:
             await channel.send(f"Hey {fisaurus.mention}, I won our debate. 🏆")
+            await asyncio.sleep(2)
 
         # find thurgen
         thurgen = next(
@@ -131,6 +134,7 @@ async def post_fun_fact_or_poll():
 
         if thurgen:
             await channel.send(f"Hey {thurgen.mention}, I saw you! 👀")
+            await asyncio.sleep(2)
 
         # find shelby
         shelby = next(
@@ -142,6 +146,7 @@ async def post_fun_fact_or_poll():
             await channel.send(
                 f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, {shelby.mention}! 🎉🎉🎉"
             )
+            await asyncio.sleep(2)
             await channel.send(
                 "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
             )
@@ -149,6 +154,7 @@ async def post_fun_fact_or_poll():
         await channel.send(
             f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, Shelby! 🎉🎉🎉"
         )
+        await asyncio.sleep(2)
         await channel.send(
             "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
         )
