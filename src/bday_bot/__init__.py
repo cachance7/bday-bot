@@ -96,48 +96,31 @@ async def post_fun_fact_or_poll():
     try:
         # find lauren in the guild
         print("Finding lauren")
-        lauren = next(
-            (
-                member
-                for member in guild.members
-                if member.display_name.lower() == "lauren"
-            ),
-            None,
-        )
-        print(f"Found lauren: {lauren}")
+        lauren = guild.get_member_named("lauren")
 
         if lauren:
             print("Sending message to lauren")
-            await channel.send(f"Hey {lauren.mention}, nice answers! 🌟")
+            await channel.send(f"Hey {lauren.mention}, thanks for your help. Nice answers! 🌟")
             await asyncio.sleep(2)
             print("Sent message to lauren")
 
         # find al in the guild
         print("Finding al")
-        al = next(
-            (member for member in guild.members if member.display_name == "al"), None
-        )
-        print(f"Found al: {al}")
+        al = guild.get_member_named("al")
 
         if al:
             await channel.send(f"Hey {al.mention}, fight me! 🤺")
             await asyncio.sleep(2)
 
         # find fisaurus
-        fisaurus = next(
-            (member for member in guild.members if member.display_name == "fisaurus"),
-            None,
-        )
+        fisaurus = guild.get_member_named("fisaurus")
 
         if fisaurus:
             await channel.send(f"Hey {fisaurus.mention}, I won our debate. 🏆")
             await asyncio.sleep(2)
 
         # find thurgen
-        thurgen = next(
-            (member for member in guild.members if member.display_name == "thurgen"),
-            None,
-        )
+        thurgen = guild.get_member_named("thurgen")
 
         if thurgen:
             await channel.send(f"Hey {thurgen.mention}, I saw you! 👀")
@@ -145,10 +128,7 @@ async def post_fun_fact_or_poll():
 
         # find shelby
         print("Finding shelby")
-        shelby = next(
-            (member for member in guild.members if member.display_name == "shelby"),
-            None,
-        )
+        shelby = guild.get_member_named("shelby")
 
         print(f"Found shelby: {shelby}")
         if shelby:
