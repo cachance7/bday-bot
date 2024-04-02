@@ -97,7 +97,7 @@ async def post_fun_fact_or_poll():
         )
 
         if lauren:
-            await channel.send(f"Hey {lauren.mention}, you nice answers! 🌟")
+            await channel.send(f"Hey {lauren.mention}, nice answers! 🌟")
 
         # find al in the guild
         al = next(
