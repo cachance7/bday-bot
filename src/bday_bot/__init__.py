@@ -135,9 +135,15 @@ async def post_fun_fact_or_poll():
             await channel.send(
                 f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, {shelby.mention}! 🎉🎉🎉"
             )
+            await channel.send(
+                "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
+            )
     except Exception as e:
         await channel.send(
             f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, Shelby! 🎉🎉🎉"
+        )
+        await channel.send(
+            "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
         )
 
 
