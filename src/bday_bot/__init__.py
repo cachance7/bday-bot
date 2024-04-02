@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from bday_bot.sentiment import analyze_sentiment
 from bday_bot.data import (
     FACTS_AND_POLLS,
+    FUN_FACT_ITEMS,
     KIND_SHELBY_REPLY,
     NON_EXISTING_REACTION_RESPONSES,
     REPLY_TO_POSITIVE_RESPONSE,
@@ -70,7 +71,7 @@ async def post_fun_fact_or_poll():
     #     "Let's all take a moment to appreciate Shelby by sharing how we feel about him through emoji."
     # )
 
-    for item in FACTS_AND_POLLS:
+    for item in FUN_FACT_ITEMS:
         try:
             print(f"Posting item {item}")
             # await asyncio.sleep(5 * 60)
