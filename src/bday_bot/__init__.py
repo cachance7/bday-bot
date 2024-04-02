@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 from bday_bot.sentiment import analyze_sentiment
 from bday_bot.data import (
     FACTS_AND_POLLS,
-    FUN_FACT_ITEMS,
     KIND_SHELBY_REPLY,
     NON_EXISTING_REACTION_RESPONSES,
     REPLY_TO_POSITIVE_RESPONSE,
@@ -20,18 +19,18 @@ from bday_bot.data import (
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
-
 BOT_CHANNEL = "shelby-bday-react-zone"
+
+TARGET_SERVER_NAME = os.getenv("TARGET_SERVER_NAME", "")
+TARGET_SERVER_ID = os.getenv("TARGET_SERVER_ID", "")
+TARGET_SERVER = (TARGET_SERVER_NAME, int(TARGET_SERVER_ID))
+
 
 intents = discord.Intents.none()
 intents.messages = True
 intents.reactions = True
 
-
 client = discord.Client(intents=intents)
-
-TARGET_SERVER = ("Queers for Fears", 1216970775052025876)
-# TARGET_SERVER = ("casey's server", 704379622627999744)
 
 item_lookup = {}
 
@@ -62,102 +61,33 @@ async def post_fun_fact_or_poll():
             BOT_CHANNEL, topic="Shelby is 30 today. Let's celebrate them! 🎉"
         )
 
-    #
-    # await channel.send(
-    #     "Hello - I am here to celebrate Shelby's birthday. Participation is mandatory. @everyone"
-    # )
-    # await asyncio.sleep(2)
-    # await channel.send(
-    #     "Let's all take a moment to appreciate Shelby by sharing how we feel about him through emoji."
-    # )
+    await channel.send(
+        "Hello - I am here to celebrate Shelby's birthday. Participation is mandatory. @everyone"
+    )
+    await asyncio.sleep(2)
+    await channel.send(
+        "Let's all take a moment to appreciate Shelby by sharing how we feel about him through emoji."
+    )
 
-    # for item in FUN_FACT_ITEMS:
-    #     try:
-    #         print(f"Posting item {item}")
-    #         # await asyncio.sleep(5 * 60)
-    #
-    #         if item["type"] == "fact":
-    #             print(f"Posting fact {item['text']}")
-    #             message = await channel.send(f"FACT: {item['text']}")
-    #             item_lookup[message.id] = item
-    #         else:
-    #             print(f"Posting poll {item['question']}")
-    #             message = await channel.send(f"POLL: {item['question']}")
-    #             item_lookup[message.id] = item
-    #             for reaction in item["reactions"]:
-    #                 await message.add_reaction(reaction)
-    #     except Exception as e:
-    #         print(f"Error posting item {item}: {e}")
-    #
-    # print("All items posted. Waiting for 10 minutes before closing the channel.")
-    # await asyncio.sleep(10 * 60)
+    for item in FACTS_AND_POLLS:
 
-    try:
-        # members = []
-        # async for member in guild.fetch_members(limit=None):
-        #     members.append(member)
+        if item["type"] == "fact":
+            message = await channel.send(f"FACT: {item['text']}")
+            item_lookup[message.id] = item
+        else:
+            message = await channel.send(f"POLL: {item['question']}")
+            item_lookup[message.id] = item
+            for reaction in item["reactions"]:
+                await message.add_reaction(reaction)
 
-        # find lauren in the guild
-        # lauren = next(
-        #     (member for member in members if member.display_name.lower() == "lauren"),
-        #     None,
-        # )
+        # Wait about an hour before posting again
+        await asyncio.sleep(random.randint(70, 90) * 60)
 
-        await channel.send("oh, btw...")
-        # if lauren:
-        await channel.send(f"Hey @Lauren, nice answers! 🌟")
-            # await asyncio.sleep(2)
+    await asyncio.sleep(10 * 60)
 
-        # find al in the guild
-        # al = next((member for member in members if member.display_name == "al"), None)
-
-        # if al:
-        await channel.send(f"Hey @al, fight me! 🤺")
-            # await asyncio.sleep(2)
-
-        # find fisaurus
-        # fisaurus = next(
-        #     (member for member in members if member.display_name == "fisaurus"),
-        #     None,
-        # )
-
-        # if fisaurus:
-        await channel.send(f"Hey @fisaurus, I won our debate. 🏆")
-            # await asyncio.sleep(2)
-
-        # # find thurgen
-        # thurgen = next(
-        #     (member for member in members if member.display_name == "thurgen"),
-        #     None,
-        # )
-
-        # if thurgen:
-        await channel.send(f"Hey @thurgen, I saw you! 👀")
-            # await asyncio.sleep(2)
-
-        # find shelby
-        # shelby = next(
-        #     (member for member in members if member.display_name == "shelby"),
-        #     None,
-        # )
-        #
-        # if shelby:
-        #     await channel.send(
-        #         f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, {shelby.mention}! 🎉🎉🎉"
-        #     )
-        #     await asyncio.sleep(2)
-        #     await channel.send(
-        #         "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
-        #     )
-    except Exception as e:
-        pass
-        # await channel.send(
-        #     f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, Shelby! 🎉🎉🎉"
-        # )
-        # await asyncio.sleep(2)
-        # await channel.send(
-        #     "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
-        # )
+    await channel.send(
+        "That's all for now. Thanks for participating! Hope you had a happy birthday Shelby! 🎉🎉🎉"
+    )
 
 
 @client.event
@@ -167,22 +97,13 @@ async def on_message(message: discord.Message):
     if not client.user.mentioned_in(message):
         return
 
-    if (
-        "shelby" == message.author.display_name
-        or "btier" == message.author.display_name
-    ):
+    if "shelby" == message.author.display_name:
         await message.reply(random.choice(KIND_SHELBY_REPLY))
         return
 
     if "al" == message.author.display_name:
         await message.reply(
             random.choice(["What were you told about antagonizing me?", "Fight me!"])
-        )
-        return
-
-    if "fisaurus" == message.author.display_name:
-        await message.reply(
-            "I'm sorry, I can't hear you over the sound of how right I am.",
         )
         return
 
@@ -220,7 +141,7 @@ async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
     if item["type"] != "poll":
         return
 
-    if "shelby" == user.display_name or "btier" == user.display_name:
+    if "shelby" == user.display_name:
         await reaction.message.reply(random.choice(PATRONIZING_RESPONSE))
         return
 
