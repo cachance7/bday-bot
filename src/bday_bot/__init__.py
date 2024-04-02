@@ -93,69 +93,71 @@ async def post_fun_fact_or_poll():
     # await asyncio.sleep(10 * 60)
 
     try:
-        members = []
-        async for member in guild.fetch_members(limit=None):
-            members.append(member)
+        # members = []
+        # async for member in guild.fetch_members(limit=None):
+        #     members.append(member)
 
         # find lauren in the guild
-        lauren = next(
-            (member for member in members if member.display_name.lower() == "lauren"),
-            None,
-        )
+        # lauren = next(
+        #     (member for member in members if member.display_name.lower() == "lauren"),
+        #     None,
+        # )
 
-        if lauren:
-            await channel.send(f"Hey {lauren.mention}, nice answers! 🌟")
-            await asyncio.sleep(2)
+        await channel.send("oh, btw...")
+        # if lauren:
+        await channel.send(f"Hey @Lauren, nice answers! 🌟")
+            # await asyncio.sleep(2)
 
         # find al in the guild
-        al = next((member for member in members if member.display_name == "al"), None)
+        # al = next((member for member in members if member.display_name == "al"), None)
 
-        if al:
-            await channel.send(f"Hey {al.mention}, fight me! 🤺")
-            await asyncio.sleep(2)
+        # if al:
+        await channel.send(f"Hey @al, fight me! 🤺")
+            # await asyncio.sleep(2)
 
         # find fisaurus
-        fisaurus = next(
-            (member for member in members if member.display_name == "fisaurus"),
-            None,
-        )
+        # fisaurus = next(
+        #     (member for member in members if member.display_name == "fisaurus"),
+        #     None,
+        # )
 
-        if fisaurus:
-            await channel.send(f"Hey {fisaurus.mention}, I won our debate. 🏆")
-            await asyncio.sleep(2)
+        # if fisaurus:
+        await channel.send(f"Hey @fisaurus, I won our debate. 🏆")
+            # await asyncio.sleep(2)
 
-        # find thurgen
-        thurgen = next(
-            (member for member in members if member.display_name == "thurgen"),
-            None,
-        )
+        # # find thurgen
+        # thurgen = next(
+        #     (member for member in members if member.display_name == "thurgen"),
+        #     None,
+        # )
 
-        if thurgen:
-            await channel.send(f"Hey {thurgen.mention}, I saw you! 👀")
-            await asyncio.sleep(2)
+        # if thurgen:
+        await channel.send(f"Hey @thurgen, I saw you! 👀")
+            # await asyncio.sleep(2)
 
         # find shelby
-        shelby = next(
-            (member for member in members if member.display_name == "shelby"),
-            None,
-        )
-
-        if shelby:
-            await channel.send(
-                f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, {shelby.mention}! 🎉🎉🎉"
-            )
-            await asyncio.sleep(2)
-            await channel.send(
-                "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
-            )
+        # shelby = next(
+        #     (member for member in members if member.display_name == "shelby"),
+        #     None,
+        # )
+        #
+        # if shelby:
+        #     await channel.send(
+        #         f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, {shelby.mention}! 🎉🎉🎉"
+        #     )
+        #     await asyncio.sleep(2)
+        #     await channel.send(
+        #         "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
+        #     )
     except Exception as e:
-        await channel.send(
-            f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, Shelby! 🎉🎉🎉"
-        )
-        await asyncio.sleep(2)
-        await channel.send(
-            "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
-        )
+        pass
+        # await channel.send(
+        #     f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, Shelby! 🎉🎉🎉"
+        # )
+        # await asyncio.sleep(2)
+        # await channel.send(
+        #     "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
+        # )
 
 
 @client.event
