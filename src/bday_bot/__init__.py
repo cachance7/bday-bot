@@ -26,6 +26,7 @@ BOT_CHANNEL = "shelby-bday-react-zone"
 intents = discord.Intents.none()
 intents.messages = True
 intents.reactions = True
+intents.members = True
 
 
 client = discord.Client(intents=intents)
