@@ -94,6 +94,7 @@ async def post_fun_fact_or_poll():
 
     try:
         # find lauren in the guild
+        print("Finding lauren")
         lauren = next(
             (
                 member
@@ -102,15 +103,20 @@ async def post_fun_fact_or_poll():
             ),
             None,
         )
+        print(f"Found lauren: {lauren}")
 
         if lauren:
+            print("Sending message to lauren")
             await channel.send(f"Hey {lauren.mention}, nice answers! 🌟")
             await asyncio.sleep(2)
+            print("Sent message to lauren")
 
         # find al in the guild
+        print("Finding al")
         al = next(
             (member for member in guild.members if member.display_name == "al"), None
         )
+        print(f"Found al: {al}")
 
         if al:
             await channel.send(f"Hey {al.mention}, fight me! 🤺")
@@ -137,12 +143,15 @@ async def post_fun_fact_or_poll():
             await asyncio.sleep(2)
 
         # find shelby
+        print("Finding shelby")
         shelby = next(
             (member for member in guild.members if member.display_name == "shelby"),
             None,
         )
 
+        print(f"Found shelby: {shelby}")
         if shelby:
+            print("Sending message to shelby")
             await channel.send(
                 f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, {shelby.mention}! 🎉🎉🎉"
             )
@@ -151,6 +160,7 @@ async def post_fun_fact_or_poll():
                 "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
             )
     except Exception as e:
+        print(f"Error closing channel: {e}")
         await channel.send(
             f"That's all for now. Thanks for participating! Some of you were great sports. Hope you had a happy birthday, Shelby! 🎉🎉🎉"
         )
@@ -158,6 +168,7 @@ async def post_fun_fact_or_poll():
         await channel.send(
             "https://www.canva.com/design/DAGBO9fkpyc/fokk6CElnMvoLQ1ILeNGog/view"
         )
+        print("Sent closing message")
 
 
 @client.event
