@@ -71,18 +71,24 @@ async def post_fun_fact_or_poll():
     # )
 
     for item in FACTS_AND_POLLS:
-        # Wait about an hour before posting again
-        await asyncio.sleep(10 * 60)
+        try:
+            print(f"Posting item {item}")
+            # await asyncio.sleep(5 * 60)
 
-        if item["type"] == "fact":
-            message = await channel.send(f"FACT: {item['text']}")
-            item_lookup[message.id] = item
-        else:
-            message = await channel.send(f"POLL: {item['question']}")
-            item_lookup[message.id] = item
-            for reaction in item["reactions"]:
-                await message.add_reaction(reaction)
+            if item["type"] == "fact":
+                print(f"Posting fact {item['text']}")
+                message = await channel.send(f"FACT: {item['text']}")
+                item_lookup[message.id] = item
+            else:
+                print(f"Posting poll {item['question']}")
+                message = await channel.send(f"POLL: {item['question']}")
+                item_lookup[message.id] = item
+                for reaction in item["reactions"]:
+                    await message.add_reaction(reaction)
+        except Exception as e:
+            print(f"Error posting item {item}: {e}")
 
+    print("All items posted. Waiting for 10 minutes before closing the channel.")
     await asyncio.sleep(10 * 60)
 
     try:
